@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>
+            Paints
+        </title>
+        
+        <script type="text/javascript">
+            var arr=[];
+            
+            function check(name)
+            {
+               if (document.getElementById(name).checked==true)
+                  {
+                   arr.push(name);
+                  
+                  }
+                  else
+                  {
+                  var index= arr.indexOf(name);
+                  arr.splice(index,1);
+                  }
+            
+            }
+            function post(path)
+            {
+                method= "POST";
+                var form=document.createElement("form");
+                form.setAttribute("method",method);
+                form.setAttribute("action",path);
+                for(var key in arr){
+                    var field=document.createElement("input");
+                    field.setAttribute("type","hidden");
+                    field.setAttribute("name",key);
+                    field.setAttribute("value",arr[key]);
+                    form.appendChild(field);
+                }
+                document.body.appendChild(form);
+                form.submit();
+                
+            }
+            
+            
+            
+            
+        </script>
+    </head>
+    <body>
+        
+        <button onclick="post('/compare/')"> Compare Now</button>
+        <button onclick="post('/pdf/')">Download comparison sheet as pdf</button>
+        
+        <div id="A">
+        {%for item in data %}
+        
+        <div id="B" style="display:inline-block;width:400px;height:200px;padding-top:30px;margin-left:20px;margin-bottom:3cm">
+            {%load staticfiles%}
+        <img src="/static/{{item.image}}" />
+        <p><b><u>{{item.name}}</b></u></p>
+        <p>Availability:{{item.availability}}</p>
+        <p>Price:{{item.price}}</p>
+        <p><b>Add To Compare</b><input type="checkbox" id ="{{item.name}}" onclick="check('{{item.name}}')"  unchecked </p>
+        </div>
+        
+        
+        
+        {%endfor%}
+        </div>
+       
+        
+        
+    </body>
+    
+    
+    
+    
+</html>

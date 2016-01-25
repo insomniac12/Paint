@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>
+            Compare
+        </title>
+    </head>
+    <body>        
+        <table border="1" cellpadding="30">
+            <tr>
+            <th>Product</th>
+            <th>Type</th>
+            <th>Brand</th>
+            <th>Finish_Type</th>
+            <th>Coverage</th>
+            <th>Availability</th>
+            <th>Price</th>
+            <th>Best_For</th>
+            <th>Washability</th>
+            <th>Eco_Friendly</th>
+        </tr>
+            {%for item in query%}
+            <tr>
+                
+        <td>{%load staticfiles%}
+        <img src="/static/{{item.image}}"/>
+            {{item.name}}</td>        
+        <td>{{item.product_type}}</td>             
+        <td>{{item.brand}}</td>             
+        <td>{{item.finish_type}}</td>            
+        <td>{{item.coverage}}</td>
+        <td>{{item.availability}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.best_for}}</td>
+        <td>{{item.washability}}</td>
+        <td>{{item.eco_friendly}}</td>
+        <td>{{item.durability}}</td>
+            </tr>
+            
+        {%endfor%}
+        </table>
+    </body>
+</hmtl>
